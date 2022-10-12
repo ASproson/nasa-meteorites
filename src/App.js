@@ -46,24 +46,32 @@ function App() {
     return meteoriteImgs[randomNum];
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(apiUrl)
-  //     .then((response) => {
-  //       console.log("calling...");
-  //       setData(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("calling...");
+        setData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  // if (data) {
-  //   console.log(data[0].geolocation.longitude);
-  //   console.log(data[0].geolocation.latitude);
-  // }
+  if (data) {
+    console.log(data[0].geolocation.longitude);
+    console.log(data[0].geolocation.latitude);
+  }
 
   // console.log(testData[0].geolocation);
+
+  if (!data) {
+    return (
+      <div>
+        <h1 className="text-3xl pt-10 font-bold">Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -71,7 +79,7 @@ function App() {
         NASA Meteorites
       </h1>
       <div>
-        {testData?.map((meteorite) => {
+        {data?.map((meteorite) => {
           return (
             <div key={meteorite.id} className="flex justify-center">
               <div className="m-2 border-2 border-blue-300 p-4 rounded-md w-[350px]">
