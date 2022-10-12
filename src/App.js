@@ -26,6 +26,26 @@ function App() {
     },
   ];
 
+  const meteoriteImgs = [
+    {
+      id: 0,
+      url: "https://solarsystem.nasa.gov/system/resources/list_images/2240_Bennu-Survey_320.jpg",
+    },
+    {
+      id: 1,
+      url: "https://solarsystem.nasa.gov/system/resources/list_images/1031_ida_dactyl_320.jpg",
+    },
+    {
+      id: 2,
+      url: "https://solarsystem.nasa.gov/system/resources/list_images/782_PIA02487_thumb.jpg",
+    },
+  ];
+
+  const getRandomMeteoriteImg = () => {
+    let randomNum = Math.floor(Math.random() * meteoriteImgs.length);
+    return meteoriteImgs[randomNum];
+  };
+
   // useEffect(() => {
   //   axios
   //     .get(apiUrl)
@@ -47,18 +67,44 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-3xl text-center pt-10 pb-6">NASA Meteorites</h1>
+      <h1 className="text-3xl font-bold text-center pt-10 pb-6">
+        NASA Meteorites
+      </h1>
       <div>
         {testData?.map((meteorite) => {
           return (
             <div key={meteorite.id} className="flex justify-center">
-              <div className="m-2 border-2 border-blue-300 p-4 rounded-md">
-                <p>Name: {meteorite.name}</p>
-                <p>Mass: {meteorite.mass}</p>
-                <p>Fell: {meteorite.fall}</p>
-                <p>Year: {String(meteorite.year).slice(0, 10)}</p>
-                <p>Longitude: {meteorite.geolocation?.longitude}</p>
-                <p>Latitude: {meteorite.geolocation?.latitude}</p>
+              <div className="m-2 border-2 border-blue-300 p-4 rounded-md w-[350px]">
+                <p className="text-2xl font-bold text-center pb-2">
+                  {meteorite.name}
+                </p>
+                <div className="flex justify-center">
+                  <img
+                    src={getRandomMeteoriteImg().url}
+                    alt="Meteorite"
+                    className="rounded-md w-[250px] h-[200px] mb-2"
+                  />
+                </div>
+                <div className="pl-8 pt-2 pb-2">
+                  <p>
+                    <span className="font-bold">Mass:</span> {meteorite.mass}
+                  </p>
+                  <p>
+                    <span className="font-bold">Fell:</span> {meteorite.fall}
+                  </p>
+                  <p>
+                    <span className="font-bold">Year:</span>{" "}
+                    {String(meteorite.year).slice(0, 10)}
+                  </p>
+                  <p>
+                    <span className="font-bold">Longitude:</span>{" "}
+                    {meteorite.geolocation?.longitude}
+                  </p>
+                  <p>
+                    <span className="font-bold">Latitude:</span>{" "}
+                    {meteorite.geolocation?.latitude}
+                  </p>
+                </div>
               </div>
             </div>
           );
